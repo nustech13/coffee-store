@@ -1,2 +1,0 @@
-# ServerQLCafe
-npm install 

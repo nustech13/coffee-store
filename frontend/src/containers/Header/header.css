@@ -1,0 +1,188 @@
+*{
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    list-style: none;
+    box-sizing: border-box;
+}
+
+html{
+    font-family: "Poppins",sans-serif;
+}
+nav{
+    background-color: rgb(58, 81, 197);
+    height: 80px;
+    width: 100%;
+    position: absolute;
+    z-index: 2;
+}
+ul{
+    margin: 0 auto;
+}
+label.logo{
+    color: white;
+    font-size: 35px;
+    line-height: 80px;
+    font-weight: bold;
+    position: absolute;
+    left: 20px;
+}
+nav ul.nav-list{
+    float: right;
+    margin-right: 30px;
+}
+
+nav ul.nav-list > li.nav-item{
+    display: inline-block;
+    line-height: 50px;
+    margin: 0px 5px;
+}
+nav ul.nav-list > li.nav-item > .nav-link,
+nav ul.nav-list > li.nav-item > .nav-cart{
+    color: white;
+    font-size: 17px;
+    text-transform: uppercase;
+    padding: 15px;
+}
+nav ul.nav-list > li.nav-item > .nav-link:hover,
+nav ul.nav-list > li.nav-item > .nav-link-active, 
+nav .nav-list .dropdown .dropdown-list .dropdown-item:hover{
+    background-color: #1b9bff;
+    transition: 0.5s;
+}
+.checkbtn{
+    font-size: 30px;
+    color: white;
+    float: right;
+    line-height: 80px;
+    margin-right: 40px;
+    cursor: pointer;
+    display: none;
+}
+#check{
+    display: none;
+}
+nav .nav-list .dropdown{
+    position: relative;
+}
+nav .nav-list .dropdown .dropdown-list{
+    margin-top: 10px;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    display: none;
+    background-color: #0082e6;
+    z-index: 3;
+}
+nav .nav-list .dropdown:hover .dropdown-list{
+    display: block;
+}
+nav .nav-list .dropdown .dropdown-list::before{
+    content: "";
+    height: 10px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    background-color:transparent;
+    transform: translateY(-100%);
+}
+nav .nav-list .dropdown .dropdown-list .dropdown-item{
+    width: 300px;
+    background-color: #0082e6;
+    color: white;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: all 0.3s linear;
+    margin-left: -30px;
+}
+nav .nav-list .dropdown .dropdown-list .dropdown-item:first-child::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid #0082e6;
+    transform: translateY(-100%);
+    transition: border-color 0.3s linear;
+}
+nav .nav-list .dropdown .dropdown-list .dropdown-item:first-child:hover:before{
+    border-bottom-color: #1b9bff;
+    transition: 0.5s;
+}
+nav .nav-list .nav-item .nav-cart{
+    background-color: #1b9bff;
+    border-radius: 50%;
+}
+nav .nav-list .nav-item .nav-cart:hover{
+    background-color: #111;
+}
+.cart-item{
+    color: #fff;
+}
+@media (max-width: 1200px) {
+    .checkbtn{
+        display: block;
+    }
+    nav ul.nav-list{
+        position: absolute;
+        width: 100%;
+        height: 140vh;
+        background-color: #2c3e50;
+        top: 80px;
+        left: -100%;
+        text-align: center;
+        transition: all 0.5s;
+        z-index: 3;
+    }
+    nav ul.nav-list li.nav-item{
+        display: block;
+        margin: 50px 0;
+        line-height: 30px;
+    }
+    nav ul.nav-list > li.nav-item > .nav-link{
+        font-size: 20px;
+    }
+    nav ul.nav-list > li.nav-item >.nav-link:hover,
+    nav ul.nav-list li.nav-item:hover{
+        background: none;
+        color: #0082e6;
+        transition: 0.5s;
+    }
+    nav ul.nav-list > li.nav-item > .nav-link-active {
+        background-color: transparent;
+        color: #0082e6;
+    }
+    #check:checked ~ ul{
+        left: 0;
+    }
+    .dropdown-list{
+        margin-top: 10px;
+        position: absolute;
+        top: 100%;
+        width: 300px;
+        display: none;
+        background-color: #0082e6;
+    }
+    .search{
+        width: 100%;
+    }
+}
+@media (max-width: 768px) {
+    nav ul.nav-list li.nav-item .nav-link{
+        font-size: 16px;
+    }
+    
+}
+@media (max-width: 498px) {
+    nav label.logo{
+        font-size: 25px;
+    }
+    nav ul.nav-list{
+        height: 80vh;
+    }
+}

@@ -11,6 +11,7 @@ body{
 }
 .wrapper{
   max-width: 100%;
+  text-align: center;
 }
 img{
     display: block;

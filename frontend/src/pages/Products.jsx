@@ -24,6 +24,7 @@ function ListProduct(props){
     const [search, setSearch] = query.get('name') === null ? useState("") : useState(query.get('name'));
     const history = useHistory();
     const componentMounted = useRef(true);
+    document.title = "Sản Phẩm";
     const getCategories = async () =>{
         const res = await axios.get('http://localhost:5000/v1/api/category/type/all');
         setDrinks(res.data.drinks);

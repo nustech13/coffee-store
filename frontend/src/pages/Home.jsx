@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import Footer from "../containers/Footer/footer";
 function Home(){
     const [index, setIndex] = useState(0);
-      
+    document.title = "Trang chủ";  
     const handleSelect = (selectedIndex) => {
       setIndex(selectedIndex);
     };

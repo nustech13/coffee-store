@@ -2,8 +2,6 @@ import routers from '../routers/index.js';
 
 const router_config = (app) => {
     app.use('/v1/api/type', routers.typeRouter);
-    app.use('/v1/api/table', routers.tableRouter);
-    app.use('/v1/api/order-status', routers.orderStatusRouter);
     app.use('/v1/api/category', routers.categoryRouter);
     app.use('/v1/api/staff', routers.staffRouter);
     app.use('/v1/api/product', routers.productRouter);

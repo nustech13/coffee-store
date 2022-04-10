@@ -1,11 +1,12 @@
 import mongoose from 'mongoose';
 
 const schema = new mongoose.Schema({
-    date :{
-        type: String
+    name:{
+        type: String,
+        required : true
     },
-    phone :{
-        type: String ,
+    email :{
+        type: String,
         minlength :10,
         required : true
     },

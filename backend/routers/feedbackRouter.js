@@ -6,6 +6,6 @@ const feedbackRouter = express.Router();
 
 
 feedbackRouter.get('/', feedbackController.getAll);
-feedbackRouter.get('/add', feedbackController.add);
-
+feedbackRouter.post('/add', feedbackController.add);
+feedbackRouter.get('/:id', feedbackController.getByProduct);
 export default feedbackRouter;

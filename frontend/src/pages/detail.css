@@ -1,7 +1,5 @@
-.container {
+  .container {
     padding: 40px 0;
-    font-family: 'Poppins', sans-serif;
-    text-align: center;
     max-width: 960px;
     
   }
@@ -11,10 +9,9 @@
   }
   .heading-section h2 {
     font-size: 32px;
-      font-weight: 500;
-      padding-top: 10px;
-      padding-bottom: 15px;
-    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    padding-top: 10px;
+    padding-bottom: 15px;
   }
   .product-img{
     text-align: center;
@@ -28,9 +25,9 @@
   }
   .product-price-discount {
     font-size: 22px;
-      font-weight: 400;
-      padding: 10px 0;
-      clear: both;
+    font-weight: 400;
+    padding: 10px 0;
+    clear: both;
   }
   .product-price-discount span.line-through {
     text-decoration: line-through;
@@ -55,7 +52,11 @@
     vertical-align: -2px;
   }
   .product-dtl{
-    padding-left: 160px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
   }
   .product-dtl .form-control {
     font-size: 15px;
@@ -69,7 +70,7 @@
     box-shadow: none;
   }
   .product-count {
-    margin-top: 35px; 
+    margin-top: 10px; 
   }
   .product-count .qtyminus,
   .product-count .qtyplus {
@@ -98,7 +99,7 @@
       color: #fff;
       padding: 0px 45px;
       display: inline-block;
-      margin-top: 20px;
+      margin-top: 10px;
       border: solid 2px #212529; 
       transition: all 0.5s ease-in-out 0s;
       height: 35px;
@@ -176,6 +177,10 @@
   ul.product-default{
     list-style: none;
     text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
   }
   ul.product-default li .img-default{
     border-radius:10% 10% 0% 0%;
@@ -201,3 +206,95 @@
   ul.product-cart li .product-name{
     padding-top: 40px;
   }
+
+  .feeback-boxed{
+    max-width: 960px;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 0 auto;
+}
+p.feedback-title{
+    font-size: 24px;
+    margin-top: 20px;
+    font-weight: bold;
+}
+.feedback-list{
+    width: 100%;
+}
+.row-feedback{
+    width: 100%;
+    border: 2px solid #111;
+    border-radius: 20px;
+    background-color: #fff;
+}
+.feedback-item{
+    max-width: 100%;
+    margin: 20px;
+    padding-left: 20px;
+}
+.feedback-avatar{
+    width: 120px;
+    height: 100px;
+    margin: 10px 30px;
+}
+.feedback-img{
+    width: 120px;
+    height: 100px;
+    border: 2px solid #111;
+    border-radius: 20px;
+    background-color: white;
+}
+.feedback-content{
+    width: 100%;
+    display: flex;
+    justify-content: left;
+    margin: 20px 0;
+}
+.feedback-top{
+    margin: 0 20px;
+}
+.feedback-name{
+    font-size: 20px;
+    font-weight: bold;
+    color: #3995d3;
+}
+.feedback-time{
+    font-size: 12px;
+    font-weight: bold;
+    color: #898888;
+}
+.feedback-bottom{
+    margin: 20px;
+    font-weight: bold;
+    color: #111;
+}
+.feedback-user{
+    width: 100%;
+    padding: 0 40px;
+}
+.feedback-comment-input{
+    border-radius: 20px 20px 0 0;
+    padding: 20px;
+    border: 2px solid #111;
+    border-bottom: none;
+}
+.feedback-infor-name, .feedback-infor-email{
+    border: 2px solid #111;
+    border-bottom: none;
+}
+input:focus, textarea:focus{
+    outline: none;
+}
+.feedback-btn{
+    border-radius:0 0 20px 20px;
+    background-color: #3995d3;
+    color: #fff;
+    border: 2px solid #111;
+}
+.feedback-btn:hover{
+    background-color: #0b5b91;
+    color: red;
+}

@@ -17,7 +17,7 @@ export const categoryController = {
     },
     getAll: async (req, res) =>{
         try {
-            const categories = await CategoryModel.find().populate('type');
+            const categories = await CategoryModel.find();
             res.status(200).json(categories);
         } catch (error) {
             res.status(500).json(error);

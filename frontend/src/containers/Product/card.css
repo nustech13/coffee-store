@@ -10,10 +10,18 @@
     position: absolute;
     margin-bottom: 30px;
     z-index: 1;
+    border-radius: 20px !important;
+    border: 2px solid #111 !important;
 }
 .card:hover{
     box-shadow: 5px 5px 5px 0 #111;
     transform: translateY(-10px);
+}
+img.card-img-top{
+    border-radius: 20px 20px 0 0;
+}
+.img-link{
+    text-decoration: none;
 }
 .card-sale{
     position: absolute;
@@ -29,7 +37,7 @@
     font-weight: bold;
 }
 .btn-add-cart{
-    background-color: #4F2D32;
+    background-color: #0082e6;
     color: #fff;
     border-radius: 8px;
     height: 40px;
@@ -43,7 +51,7 @@
     bottom: 80px;
 }
 .btn-add-cart:hover{
-    background-color: rgb(96, 76, 76);
+    background-color: #1b9bff;
     color: red;
 }
 .card-price-current{
@@ -59,3 +67,56 @@
     }
     
 }
+
+.pagination{
+    display: flex;
+    text-align: center;
+    justify-content: center;       
+}
+.pagination > li {
+    display: inline-block;
+    padding-left: 0;
+}
+.pagination > li {
+    list-style: none;
+    border: 0.9px solid;
+}
+.pagination > li > a,
+.pagination > li > span {
+    position: relative;
+    float: left;
+    padding: 6px 12px;
+    line-height: 1.42857143;
+    text-decoration: none;
+    color: #2c689c;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    margin-left: -1px;
+}
+
+.pagination>li.active>a {
+    color: #fff;
+    background-color: #3a51c5;
+    border-color: #1e7e34;
+}
+
+.pagination > li > a:hover {
+    background-color:  #1b9bff;
+    color: white;
+}
+.pagination > li:first-child > a,
+.pagination > li:first-child > span {
+    margin-left: 0;
+    padding: 0px;
+    border-bottom-left-radius: 4px;
+    border-top-left-radius: 4px;
+    display: none!important;
+}
+.pagination > li:last-child > a,
+.pagination > li:last-child > span {
+    border-bottom-right-radius: 4px;
+    margin-right: 0;
+    padding: 0px!important;
+    border-top-right-radius: 4px;
+    display: none!important;
+}        

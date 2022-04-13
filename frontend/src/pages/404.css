@@ -1,0 +1,19 @@
+
+
+.img-404{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.link-back, .link-back:hover{
+    text-decoration: none;
+    cursor: pointer;
+    
+}
+.link-back h3{
+    color: red;
+    font-weight: bold;
+}
+.link-back h3:hover{
+    text-decoration: underline;
+}

@@ -1,31 +1,34 @@
-import { hover } from '@testing-library/user-event/dist/hover';
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Route, Link, useHistory} from "react-router-dom";
+import Cookies from 'universal-cookie';
 import './header.css';
+    const cookies = new Cookies();
     const menus = [
         {
-            id:'1',
+            id:'trang-chu',
             name : 'Trang chủ',
             to : '/',
             exact : true
         },
         {
-            id:'2',
+            id:'lien-he',
             name: 'Liên hệ',
             to: '/lien-he',
             exact: false
         },
         {
-            id:'3',
+            id:'san-pham',
             name: 'Sản phẩm',
-            to: '/san-pham/tat-ca',
+            to: '/san-pham/',
             exact: false
         }
         
     ];
-    function Header() {
+    function Header({isLinkActive}) {
+            const { cart } = useSelector(state => state.cart);
             const history = useHistory();
-            const [isActive, setIsActive] = useState('1');
+            const [isActive, setIsActive] = useState(isLinkActive);
             const MenuLink = ({
                 label,
                 to,
@@ -76,13 +79,13 @@ import './header.css';
                     <label className="logo">COFFE HOUSE <i className="fa fa-coffee" aria-hidden="true"></i></label>
                     <ul className="nav-list">
                         {showMenus(menus)}
-                        <li className='nav-item dropdown'><Link to={''} className='nav-link'>Nguyễn Minh Thuận <i className="fa fa-caret-down dropdown__caret"></i></Link>
+                        {cookies.get('customer') ?
+                        (<li className='nav-item dropdown'><Link to={'/dang-nhap'} className='nav-link'>{cookies.get('customer').name} <i className="fa fa-caret-down dropdown__caret"></i></Link>
                             <ul className="dropdown-list">
-                                <li className="dropdown-item">Thông tin <i className="fa fa-info" aria-hidden="true"></i></li>
-                                <li className="dropdown-item">Đăng Xuất <i className="fa fa-sign-out" aria-hidden="true"></i></li>
+                                <li className="dropdown-item" onClick={() => {cookies.remove('customer'); history.push('/')}}>Đăng Xuất <i className="fa fa-sign-out" aria-hidden="true"></i></li>
                             </ul>
-                        </li>
-                        <li className='nav-item'><Link to={''} className='nav-cart'><i className="fa fa-shopping-cart cart-item" aria-hidden="true"> : <label className="cart-count">100</label></i></Link></li>
+                        </li>) : (<li className='nav-item'><Link to={'/dang-nhap'} className={(isActive.localeCompare("dang-nhap") === 0) ? "nav-link nav-link-active" : "nav-link"}>Đăng Nhập</Link></li>)}
+                        <li className='nav-item'><Link to={'/gio-hang'} className='nav-cart'><i className="fa fa-shopping-cart cart-item" aria-hidden="true"> : <label className="cart-count">{cart.length}</label></i></Link></li>
                     </ul>
                 </nav>
                 </div>

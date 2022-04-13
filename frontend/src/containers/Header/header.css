@@ -1,16 +1,5 @@
-*{
-    margin: 0;
-    padding: 0;
-    text-decoration: none;
-    list-style: none;
-    box-sizing: border-box;
-}
-
-html{
-    font-family: "Poppins",sans-serif;
-}
 nav{
-    background-color: rgb(58, 81, 197);
+    background: rgb(58, 81, 197);
     height: 80px;
     width: 100%;
     position: absolute;

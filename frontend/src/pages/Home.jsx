@@ -3,6 +3,7 @@ import { Carousel } from 'react-bootstrap';
 import './home.css';
 import { Link } from 'react-router-dom';
 import Footer from "../containers/Footer/footer";
+import Header from "../containers/Header/header";
 function Home(){
     const [index, setIndex] = useState(0);
     document.title = "Trang chủ";  
@@ -12,6 +13,7 @@ function Home(){
   
     return (
       <div>
+        <Header isLinkActive={"trang-chu"}/>
         <div className="wrapper">
           <div className="slide-show" style={{margin:'0 auto'}}>
           <Carousel fade activeIndex={index} onSelect={handleSelect}>
@@ -60,22 +62,22 @@ function Home(){
           <div className="container" style={{maxWidth: 1440}}>
                 <div className="layout">
                     <div className="layout-item">
-                        <Link to={'/san-pham/ca-phe'} className="link-img"><img src="https://1.bp.blogspot.com/-yU8Noafg11w/X27qECGJL1I/AAAAAAAAAok/d1P9ZbHZ2P8UiDpanG1IpndT6IYOo_27gCLcBGAsYHQ/s2048/Ca%25CC%2580%2BPhe%25CC%2582%2BCaCao%2BSu%25CC%259B%25CC%2583a%2BDu%25CC%259B%25CC%2580a%2B%25283%2529.jpg" alt="" className="layout-img"/></Link>
+                        <Link to={'/san-pham/'} className="link-img"><img src="https://1.bp.blogspot.com/-yU8Noafg11w/X27qECGJL1I/AAAAAAAAAok/d1P9ZbHZ2P8UiDpanG1IpndT6IYOo_27gCLcBGAsYHQ/s2048/Ca%25CC%2580%2BPhe%25CC%2582%2BCaCao%2BSu%25CC%259B%25CC%2583a%2BDu%25CC%259B%25CC%2580a%2B%25283%2529.jpg" alt="" className="layout-img"/></Link>
                     </div>
                     <div className="layout-item">
-                        <Link to={'/san-pham/tra-sua'} className="link-img"><img src="https://img4.thuthuatphanmem.vn/uploads/2020/05/07/hinh-anh-pha-tra-sua-dep_062228340.jpg" alt="" className="layout-img"/></Link>
+                        <Link to={'/san-pham/'} className="link-img"><img src="https://img4.thuthuatphanmem.vn/uploads/2020/05/07/hinh-anh-pha-tra-sua-dep_062228340.jpg" alt="" className="layout-img"/></Link>
                     </div>
                     <div className="layout-item">
-                        <Link to={'/san-pham/sinh-to'} className="link-img"><img src="https://cdn.tgdd.vn/Files/2017/04/24/975816/bi-quyet-pha-sinh-to-ngon-dung-dieu-ngay-tai-nha-1_760x507.jpg" alt="" className="layout-img"/></Link>
+                        <Link to={'/san-pham/'} className="link-img"><img src="https://cdn.tgdd.vn/Files/2017/04/24/975816/bi-quyet-pha-sinh-to-ngon-dung-dieu-ngay-tai-nha-1_760x507.jpg" alt="" className="layout-img"/></Link>
                     </div>
                     <div className="layout-item">
-                        <Link to={'/san-pham/do-chien'} className="link-img"><img src="https://dulichvietnam.com.vn/vnt_upload/File/Image/quan_ca_vien_chien_o_tphcm.jpg" alt="" className="layout-img"/></Link>
+                        <Link to={'/san-pham/'} className="link-img"><img src="https://dulichvietnam.com.vn/vnt_upload/File/Image/quan_ca_vien_chien_o_tphcm.jpg" alt="" className="layout-img"/></Link>
                     </div>
                     <div className="layout-item">
-                        <Link to={'/san-pham/banh-kem'} className="link-img"><img src="https://chupanhmonan.com/wp-content/uploads/2019/01/b54a019c4280a63d91eee760059d7357.jpg" alt="" className="layout-img"/></Link>
+                        <Link to={'/san-pham/'} className="link-img"><img src="https://chupanhmonan.com/wp-content/uploads/2019/01/b54a019c4280a63d91eee760059d7357.jpg" alt="" className="layout-img"/></Link>
                     </div>
                     <div className="layout-item">
-                        <Link to={'/san-pham/banh-ngot'} className="link-img"><img src="https://traicayvuongtron.vn/resources/uploads/hinh_bai_top_5/toptiemtenbanh/banhphap/lt_patisserie.jpg" alt="" className="layout-img"/></Link>
+                        <Link to={'/san-pham/'} className="link-img"><img src="https://traicayvuongtron.vn/resources/uploads/hinh_bai_top_5/toptiemtenbanh/banhphap/lt_patisserie.jpg" alt="" className="layout-img"/></Link>
                     </div>
                 </div>
             </div>

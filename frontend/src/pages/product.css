@@ -73,6 +73,21 @@ p.error{
         height: 120vh;
     }
 }
+@media only screen and (max-height: 600px) {
+    .type-list{
+        height: 150vh;
+    }
+}
+@media only screen and (max-height: 450px) {
+    .type-list{
+        height: 300vh;
+    }
+}
+@media only screen and (max-height: 300px) {
+    .type-list{
+        height: 400vh;
+    }
+}
 .search{
     width: 100%;
     height: 60px;
@@ -85,6 +100,7 @@ p.error{
     height: 40px;
     border: none;
     background-color: #efefef;
+    padding: 0 10px;
 }
 input.search-input:focus{
     outline: none;

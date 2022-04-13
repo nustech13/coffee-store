@@ -1,19 +1,19 @@
-import { StaffModel } from "../models/StaffModel.js";
+import { CustomerModel } from "../models/CustomerModel.js";
 
-export const staffController = {
+export const customerController = {
     add: async (req, res)=>{
         try {
-            const newStaff = new StaffModel(req.body);
-            const saveStaff = await newStaff.save();
-            res.status(200).json(saveStaff);
+            const newCustomer = new CustomerModel(req.body);
+            const saveCustomer = await newCustomer.save();
+            res.status(200).json(saveCustomer);
         } catch (error) {
             res.status(500).json(error);
         }
     },
     getAll: async (req, res) =>{
         try {
-            const staffs = await StaffModel.find();
-            res.status(200).json(staffs);
+            const Customers = await CustomerModel.find();
+            res.status(200).json(Customers);
         } catch (error) {
             res.status(500).json(error);
         }
@@ -23,14 +23,14 @@ export const staffController = {
         const pageSize = parseInt(req.body.pageSize);
         const skipIndex = (page - 1) * pageSize;
         const result = {
-            staffs:[],
+            Customers:[],
             numberOfResult: '',
             offset: ''
         }
         try {
-            result.staffs = await StaffModel.find();
-            result.numberOfResult = result.staffs.length;
-            result.staffs = result.staffs = await StaffModel.find()
+            result.Customers = await CustomerModel.find();
+            result.numberOfResult = result.Customers.length;
+            result.Customers = result.Customers = await CustomerModel.find()
             .limit(pageSize)
             .skip(skipIndex);
             result.offset = skipIndex;
@@ -41,8 +41,8 @@ export const staffController = {
     },
     update: async (req, res) =>{
         try {
-            const staff = await StaffModel.findById(req.params.id);
-            await staff.updateOne({ $set: req.body});
+            const Customer = await CustomerModel.findById(req.params.id);
+            await Customer.updateOne({ $set: req.body});
             res.status(200).json("Update successfully!");
         } catch (error) {
             res.status(500).json(error);
@@ -50,7 +50,7 @@ export const staffController = {
     },
     delete: async (req, res) =>{
         try {
-            await StaffModel.findByIdAndDelete(req.params.id);
+            await CustomerModel.findByIdAndDelete(req.params.id);
             res.status(200).json("Delete successfully!");
         } catch (error) {
             res.status(500).json(error);
@@ -58,8 +58,8 @@ export const staffController = {
     },
     getA: async (req, res) => {
         try {
-            const staff = await StaffModel.findById(req.params.id);
-            res.status(200).json(staff);
+            const Customer = await CustomerModel.findById(req.params.id);
+            res.status(200).json(Customer);
         } catch (error) {
             res.status(500).json(error);
         }

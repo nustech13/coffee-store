@@ -102,16 +102,9 @@ export const productController = {
                 var name = new String(removeAccents(item.name)).toLowerCase().trim().replace(/ /g,"-");
                 return name === req.params.id;
             });
-            if(category.length > 0){
-                const result = {
-                    products: [], 
-                    type_name: new String(removeAccents(category[0].type.name)).toLowerCase().trim().replace(/ /g,"-")
-                };
-                result.products = await ProductModel.find({categories: category[0]._id}).populate('categories');
-                res.status(200).json(result);
-            }else{
-                res.status(200).json([]);
-            }
+            const products = await ProductModel.find({categories: category[0]._id}).populate('categories');
+            res.status(200).json(products);
+            
         } catch (error) {
             res.status(500).json(error);
         }

@@ -1,7 +1,7 @@
 import React from 'react'; 
-import Footer from "../containers/Footer/footer";
+import Footer from "../../../components/Footer/footer";
 import emailjs from 'emailjs-com';
-import Header from '../containers/Header/header';
+import Header from '../../../components/Header/header';
 const Contact = () => {
 
     document.title = "Liên hệ";  

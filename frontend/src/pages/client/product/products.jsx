@@ -1,13 +1,13 @@
 import React, { useEffect, useRef, useState, useCallback } from "react";
 import {useDispatch} from 'react-redux';
 import axios from 'axios';
-import {setAllProduct} from '../actions/product.js';
-import PaginatedItems from "../containers/Product/cardProduct.jsx";
+import {setAllProduct} from '../../../actions/product.js';
+import PaginatedItems from "../../../components/Card/cardProduct.jsx";
 import { withRouter } from "react-router";
 import './product.css';
-import Footer from '../containers/Footer/footer.jsx';
-import Loading from "../containers/Loading/Loading.jsx";
-import Header from "../containers/Header/header.jsx";
+import Footer from '../../../components/Footer/footer.jsx';
+import Loading from "../../../components/Loading/Loading.jsx";
+import Header from "../../../components/Header/header.jsx";
 function ListProduct(props){
     const [isLoading, setIsLoading] = useState(false);
     const [isLoadingChange, setIsLoadingChange] = useState(true);

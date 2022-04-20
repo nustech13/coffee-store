@@ -5,11 +5,11 @@ import './detail.css';
 import { withRouter } from "react-router";
 import axios from "axios";
 import * as moment from 'moment'
-import Footer from '../containers/Footer/footer';
-import Loading from '../containers/Loading/Loading';
-import Header from '../containers/Header/header.jsx';
+import Footer from '../../../components/Footer/footer';
+import Loading from '../../../components/Loading/Loading';
+import Header from '../../../components/Header/header.jsx';
 import Cookies from 'universal-cookie';
-import {addToCart} from '../actions/cart.js';
+import {addToCart} from '../../../actions/cart.js';
     const cookies = new Cookies();
     function ProductDetail(props){
         const [product, setProduct] = useState({});
@@ -166,7 +166,7 @@ import {addToCart} from '../actions/cart.js';
                             </div>
                         </div>
                         <div className="feedback-list">
-                        {feedbacks.reverse().map((item) =>(
+                        {feedbacks.map((item) =>(
                             <div key={item._id}  className="feedback-item">
                                 <div className="row row-feedback">
                                     <div className="col-12 feedback-content">

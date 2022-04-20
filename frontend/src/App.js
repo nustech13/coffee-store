@@ -1,13 +1,13 @@
 import './App.css';
 import { BrowserRouter as Router, Route, Switch} from "react-router-dom";
-import ListProduct from './pages/Products.jsx';
-import Home from './pages/Home.jsx';
-import ProductDetail from './pages/Detail.jsx';
-import NotFound404 from './pages/404';
-import Contact from './pages/contact';
-import Login from './pages/login.jsx';
-import Register from './pages/register.jsx';
-import Cart from './pages/cart.jsx';
+import ListProduct from './pages/client/product/products.jsx';
+import Home from './pages/client/home/home.jsx';
+import ProductDetail from './pages/client/detail/detail.jsx';
+import NotFound404 from './pages/client/notFound404/404.jsx';
+import Contact from './pages/client/contact/contact.jsx';
+import Login from './pages/client/login/login.jsx';
+import Register from './pages/client/register/register.jsx';
+import Cart from './pages/client/cart/cart.jsx';
 
 function App() {
   

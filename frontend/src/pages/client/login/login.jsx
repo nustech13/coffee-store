@@ -28,8 +28,7 @@ class Login extends Component{
             this.props.history.goBack();       
         })
         .catch(error => {
-            console.log(error);
-            alert("Sai tài khoản hoặc mật khẩu");            
+            console.log(error);           
         })
         
     }

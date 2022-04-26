@@ -20,7 +20,7 @@ const Contact = () => {
         return(
             <div>
                 <Header isLinkActive={"lien-he"}/>
-                <div className='container' style={{textAlign:'center', height: '140vh', padding: '80px 0', overflow: 'hidden'}}>
+                <div className='container' style={{textAlign:'center', height: '100vh', padding: '80px 0', overflow: 'hidden'}}>
                     <div style={{padding: '52px 0px', display:'inline-flex'}}>
                         <div className='row'>
                             <div className='col-md-12 col-lg-6'>
@@ -42,7 +42,7 @@ const Contact = () => {
                                     </b></h6>
                                 </div>
                             </div>
-                            <div className='col-md-12 col-lg-6'>
+                            <div className='col-md-12 col-lg-6' style={{marginBottom: '20px'}}>
                                 <div>
                                     <h6><b>
                                         Gửi tin nhắn cho chúng tôi:

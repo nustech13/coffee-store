@@ -2,30 +2,22 @@ import mongoose from 'mongoose';
 
 const schema = new mongoose.Schema({
     
-    sum_order :{
+    total :{
         type:Number
     },
-    customer_name :{
+    customerName :{
         type: String
     },
-    customer_phone :{
+    customerPhone :{
         type: String,
         minlength : 10
     },
-    customer_address :{
+    customerAddress :{
         type: String
     },
-    table :{
-        type : mongoose.Schema.Types.ObjectId, 
-        ref : 'Table'
-    },
     status :{
-        type : mongoose.Schema.Types.ObjectId, 
-        ref : 'OrderStatus'
-    },
-    staff :{
-        type : mongoose.Schema.Types.ObjectId, 
-        ref : 'Staff'
+        type :Boolean ,
+        default :false
     }
 },{timestamps : true});
 

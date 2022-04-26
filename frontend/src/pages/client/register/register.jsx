@@ -28,6 +28,10 @@ class Register extends Component{
         /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
         );
     };
+    checkPhone = (phone) =>{
+        var vnf_regex = /((09|03|07|08|05)+([0-9]{8})\b)/g;
+        return vnf_regex.test(phone);
+    }
     register = async (e) =>{
         e.preventDefault();
         if(this.state.name.localeCompare("") === 0){
@@ -43,17 +47,18 @@ class Register extends Component{
             alert( "Số điện thoại không được để trống");
         }else if(this.validateEmail(this.state.email) === null){
             alert( "Email không hợp lệ");
-        }else if(this.state.phone.length < 10){
+        }else if(this.state.phone.length !== 10 || !this.checkPhone(this.state.phone)){
             alert( "Số điện thoại không hợp lệ");
         }else{
             axios.post('http://localhost:5000/v1/api/auth/register/', this.state)
                 .then(data => {
-                    alert("Đăng ký thành công");
-                    this.props.history.push('/dang-nhap');       
+                    alert(data.data.mess);
+                    if(data.data.success){
+                        this.props.history.goBack();     
+                    }
                 })
                 .catch(error => {
-                    console.log(error);
-                    alert("Sai tài khoản hoặc mật khẩu");            
+                    console.log(error);            
                 })  
         }
     }

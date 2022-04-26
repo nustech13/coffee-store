@@ -1,17 +1,8 @@
 import mongoose from 'mongoose';
 
 const schema = new mongoose.Schema({
-    date : {
-        type : String 
-    },
     quantity :{
         type:Number
-    },
-    sum_price :{
-        type: Number
-    },
-    description :{
-        type: String
     },
     order :{
         type : mongoose.Schema.Types.ObjectId, 

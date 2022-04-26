@@ -6,7 +6,7 @@ export const feedbackController = {
             const newFeedback = new FeedbackModel(req.body);
             await newFeedback.save();
             const feedbacks = await FeedbackModel.find({product: req.body.product});
-            res.status(200).json(feedbacks);
+            res.status(200).json([...feedbacks].reverse());
         } catch (error) {
             res.status(500).json(error);
         }
@@ -22,7 +22,7 @@ export const feedbackController = {
     getByProduct: async (req, res) => {
         try {
             const feedbacks = await FeedbackModel.find({product: req.params.id});
-            res.status(200).json(feedbacks);
+            res.status(200).json([...feedbacks].reverse());
         } catch (error) {
             res.status(500).json(error);
         }

@@ -6,7 +6,6 @@ import feedbackRouter from './feedbackRouter.js';
 import orderRouter from './orderRouter.js';
 import orderDetailRouter from './orderDetailRouter.js';
 import authRouter from './authRouter.js';
-
 const routers =  {
     typeRouter,
     categoryRouter,

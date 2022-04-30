@@ -76,7 +76,7 @@ import './header.css';
                     <label htmlFor="check" className="checkbtn">
                         <i className="fa fa-solid fa-align-justify"></i>
                     </label>
-                    <label className="logo">COFFE HOUSE <i className="fa fa-coffee" aria-hidden="true"></i></label>
+                    <label className="logo">COFFEE HOUSE <i className="fa fa-coffee" aria-hidden="true"></i></label>
                     <ul className="nav-list">
                         {showMenus(menus)}
                         {cookies.get('customer') ?

@@ -1,10 +1,6 @@
 import { CategoryModel } from "../models/CategoryModel.js";
 import { TypeModel } from "../models/TypeModel.js"
-function removeAccents(str) {
-    return str.normalize('NFD')
-              .replace(/[\u0300-\u036f]/g, '')
-              .replace(/đ/g, 'd').replace(/Đ/g, 'D');
-}
+import { ProductModel } from "../models/ProductModel.js"
 export const categoryController = {
     add: async (req, res)=>{
         try {
@@ -60,6 +56,7 @@ export const categoryController = {
     delete: async (req, res) =>{
         try {
             await CategoryModel.findByIdAndDelete(req.params.id);
+            await ProductModel.deleteMany({categories:req.params.id});
             res.status(200).json("Delete successfully!");
         } catch (error) {
             res.status(500).json(error);

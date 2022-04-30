@@ -49,7 +49,7 @@ export const productController = {
         try {
             result.products = await ProductModel.find().populate('categories');
             result.numberOfResult = result.products.length;
-            result.products = result.products = await ProductModel.find().populate('categories')
+            result.products = await ProductModel.find().populate('categories')
             .limit(pageSize)
             .skip(skipIndex);
             result.offset = skipIndex;

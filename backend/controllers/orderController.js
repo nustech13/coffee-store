@@ -44,12 +44,47 @@ export const orderController = {
             res.status(500).json(error);
         }
     },
-    getByStatus: async (req, res) =>{
+    getAllPageSize: async (req, res) =>{
+        const page = parseInt(req.body.page);
+        const pageSize = parseInt(req.body.pageSize);
+        const skipIndex = (page - 1) * pageSize;
+        const result = {
+            orders:[],
+            numberOfResult: '',
+            offset: ''
+        }
         try {
-            const orders = await OrderModel.find({status:req.params.id});
-            res.status(200).json(orders);
+            result.orders = await OrderModel.find();
+            result.numberOfResult = result.orders.length;
+            result.orders = await OrderModel.find()
+            .limit(pageSize)
+            .skip(skipIndex);
+            result.offset = skipIndex;
+            res.status(200).json(result);           
+        } catch (error) {
+            res.status(500).json(error);
+        }
+    },
+    getByStatus: async (req, res) =>{
+        const page = parseInt(req.body.page);
+        const pageSize = parseInt(req.body.pageSize);
+        const skipIndex = (page - 1) * pageSize;
+        const result = {
+            orders:[],
+            numberOfResult: '',
+            offset: ''
+        }
+        try {
+            result.orders = await OrderModel.find({status:req.body.status});
+            result.numberOfResult = result.orders.length;
+            result.orders = await OrderModel.find({status:req.body.status})
+            .limit(pageSize)
+            .skip(skipIndex);
+            result.offset = skipIndex;
+            res.status(200).json(result);
         } catch (error) {
             res.status(500).json(error);
         }
     }
+
 }

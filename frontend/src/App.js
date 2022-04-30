@@ -8,7 +8,9 @@ import Contact from './pages/client/contact/contact.jsx';
 import Login from './pages/client/login/login.jsx';
 import Register from './pages/client/register/register.jsx';
 import Cart from './pages/client/cart/cart.jsx';
-
+import Categories from './pages/admin/category/categories';
+import Products from './pages/admin/product/products';
+import Orders from './pages/admin/order/orders';
 function App() {
   
   return (
@@ -22,6 +24,9 @@ function App() {
           <Route path={"/gio-hang"} exact component={Cart}/>
           <Route path={"/san-pham/"} exact component={ListProduct}/>
           <Route path={"/san-pham/chi-tiet/:id"} exact component={ProductDetail}/>
+          <Route path={"/admin/category"} exact component={Categories}/>
+          <Route path={"/admin/product"} exact component={Products}/>
+          <Route path={"/admin/order"} exact component={Orders}/>
           <Route component={NotFound404}/>
         </Switch>
       </Router>

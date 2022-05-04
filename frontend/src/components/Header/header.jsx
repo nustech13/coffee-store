@@ -70,25 +70,23 @@ import './header.css';
             }
             return (
                 <section>
-                <div>
-                <nav>
-                    <input type="checkbox" id="check"/>
-                    <label htmlFor="check" className="checkbtn">
-                        <i className="fa fa-solid fa-align-justify"></i>
-                    </label>
-                    <label className="logo">COFFEE HOUSE <i className="fa fa-coffee" aria-hidden="true"></i></label>
-                    <ul className="nav-list">
-                        {showMenus(menus)}
-                        {cookies.get('customer') ?
-                        (<li className='nav-item dropdown'><Link to={'/dang-nhap'} className='nav-link'>{cookies.get('customer').name} <i className="fa fa-caret-down dropdown__caret"></i></Link>
-                            <ul className="dropdown-list">
-                                <li className="dropdown-item" onClick={() => {cookies.remove('customer'); history.push('/')}}>Đăng Xuất <i className="fa fa-sign-out" aria-hidden="true"></i></li>
-                            </ul>
-                        </li>) : (<li className='nav-item'><Link to={'/dang-nhap'} className={(isActive.localeCompare("dang-nhap") === 0) ? "nav-link nav-link-active" : "nav-link"}>Đăng Nhập</Link></li>)}
-                        <li className='nav-item'><Link to={'/gio-hang'} className='nav-cart'><i className="fa fa-shopping-cart cart-item" aria-hidden="true"> : <label className="cart-count">{cart.length}</label></i></Link></li>
-                    </ul>
-                </nav>
-                </div>
+                    <nav>
+                        <input type="checkbox" id="check"/>
+                        <label htmlFor="check" className="checkbtn">
+                            <i className="fa fa-solid fa-align-justify"></i>
+                        </label>
+                        <label className="logo">COFFEE HOUSE <i className="fa fa-coffee" aria-hidden="true"></i></label>
+                        <ul className="nav-list">
+                            {showMenus(menus)}
+                            {cookies.get('customer') ?
+                            (<li className='nav-item dropdown'><Link to={'/dang-nhap'} className='nav-link'>{cookies.get('customer').name} <i className="fa fa-caret-down dropdown__caret"></i></Link>
+                                <ul className="dropdown-list">
+                                    <li className="dropdown-item" onClick={() => {cookies.remove('customer'); history.push('/')}}>Đăng Xuất <i className="fa fa-sign-out" aria-hidden="true"></i></li>
+                                </ul>
+                            </li>) : (<li className='nav-item'><Link to={'/dang-nhap'} className={(isActive.localeCompare("dang-nhap") === 0) ? "nav-link nav-link-active" : "nav-link"}>Đăng Nhập</Link></li>)}
+                            <li className='nav-item'><Link to={'/gio-hang'} className='nav-cart'><i className="fa fa-shopping-cart cart-item" aria-hidden="true"> : <label className="cart-count">{cart.length}</label></i></Link></li>
+                        </ul>
+                    </nav>
                 </section>         
             )        
     }

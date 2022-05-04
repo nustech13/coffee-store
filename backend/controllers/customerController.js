@@ -23,14 +23,14 @@ export const customerController = {
         const pageSize = parseInt(req.body.pageSize);
         const skipIndex = (page - 1) * pageSize;
         const result = {
-            Customers:[],
+            customers:[],
             numberOfResult: '',
             offset: ''
         }
         try {
-            result.Customers = await CustomerModel.find();
-            result.numberOfResult = result.Customers.length;
-            result.Customers = result.Customers = await CustomerModel.find()
+            result.customers = await CustomerModel.find();
+            result.numberOfResult = result.customers.length;
+            result.customers = result.customers = await CustomerModel.find()
             .limit(pageSize)
             .skip(skipIndex);
             result.offset = skipIndex;

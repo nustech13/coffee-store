@@ -1,20 +1,23 @@
 import React, { useEffect, useState, useCallback  } from "react";
 import axios from "axios";
 import Navigation from "../../../components/Navigation/navigation";
-import { Link } from "react-router-dom";
 import './categories.css';
 import * as ReactBootStrap from 'react-bootstrap';
+import AddCategory from "./addCategory";
+import EditCategory from "./editCategory";
 const Categories = () => {
     document.title = "Category";
     const [types, setTypes] = useState([]);
     const [page, setPage] = useState(1);
-    const [pageSize] = useState(3);
+    const [pageSize] = useState(6);
     const [totalCount, setTotalCount] = useState(0);
     const [offset, setOffset] = useState(0);
     const [categories, setCategories] = useState([]);
     const [keySearch, setKeySearch] = useState('');
     const [loading, setLoading] = useState(false);
-    
+    const [isAddActive, setIsAddActive] = useState(false);
+    const [isEditActive, setIsEditActive] = useState(false);
+    const [category, setCategory] = useState({});
     const getTypes = async () =>{
         try {
             const res = await axios.get('http://localhost:5000/v1/api/type/');
@@ -101,6 +104,8 @@ const Categories = () => {
     
     return(
       <div>
+        {isAddActive ? <AddCategory setIsAddActive={setIsAddActive} getCategories={getCategories} setLoading={setLoading} setPage={setPage}/> : <></>}
+        {isEditActive ? <EditCategory setIsEditActive={setIsEditActive} getCategories={getCategories} setLoading={setLoading} category={category} setPage={setPage}/> : <></>}
         <Navigation/>    
         <div className="boxed-category">
             <h2>QUẢN LÝ CATEGORY</h2>
@@ -124,7 +129,7 @@ const Categories = () => {
                         </select>
                     </div>
                     <div style={{paddingTop:20, paddingBottom: 20, paddingLeft:10}}>
-                        <Link to={"/admin/addCategory/"} className="btn btn-success" style={{textDecoration: 'none'}}>Add New</Link>
+                        <button className="btn btn-success" onClick={()=> setIsAddActive(true)}>Add New</button>
                     </div>
                 </div>
                 {loading ?
@@ -142,8 +147,8 @@ const Categories = () => {
                                         <td>{item.name}</td>
                                         <td>{item.type.name}</td>   
                                         <td><div style={{textAlign:'center'}}>
-                                            <Link to={"/admin/editCategory/" + item._id} className="btn btn-warning" style={{textDecoration: 'none', marginRight: '20px'}}>Edit</Link>
-                                            <button onClick={() => deleteCategory(item._id)} className="btn btn-danger" style={{margin:'auto'}}>Delete</button>
+                                            <button onClick={() => {setCategory(item); setIsEditActive(true)}} className="btn btn-warning" style={{margin: '0 20px'}}><i className="fa fa-pencil" aria-hidden="true"></i></button>
+                                            <button onClick={() => deleteCategory(item._id)} className="btn btn-danger" style={{margin:'auto'}}><i className="fa fa-trash" aria-hidden="true"></i></button>
                                         </div></td>
                                     </tr>
                                 ))}
@@ -157,7 +162,7 @@ const Categories = () => {
                         </div>
                         <div style={{display:'inline-flex'}}>
                             <button disabled={page === 1 ? "disabled" : ""} onClick={() => prevPage()} className="btn btn-secondary">Prev</button>
-                            <button disabled={page === Math.ceil(totalCount / pageSize) ? "disabled" : ""} onClick={() => nextPage()} className="btn btn-secondary">Next</button>
+                            <button disabled={page === Math.ceil(totalCount / pageSize) || (totalCount === 0) ? "disabled" : ""} onClick={() => nextPage()} className="btn btn-secondary">Next</button>
                         </div>
                     </div>
                 </div> : <div><ReactBootStrap.Spinner animation='border' variant="success"/></div>}                         

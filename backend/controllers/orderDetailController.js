@@ -44,9 +44,22 @@ export const orderDetailController = {
         }
     },
     getByOrder: async (req, res) =>{
+        const page = parseInt(req.body.page);
+        const pageSize = parseInt(req.body.pageSize);
+        const skipIndex = (page - 1) * pageSize;
+        const result = {
+            orderDetail:[],
+            numberOfResult: '',
+            offset: ''
+        }
         try {
-            const orderDetails = await OrderDetailModel.find({status:req.params.id});
-            res.status(200).json(orderDetails);
+            result.orderDetail = await OrderDetailModel.find({order:req.params.id}).populate('product');
+            result.numberOfResult = result.orderDetail.length;
+            result.orderDetail = await OrderDetailModel.find({order:req.params.id}).populate('product')
+            .limit(pageSize)
+            .skip(skipIndex);
+            result.offset = skipIndex;
+            res.status(200).json(result);
         } catch (error) {
             res.status(500).json(error);
         }

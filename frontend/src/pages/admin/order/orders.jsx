@@ -4,6 +4,7 @@ import Navigation from "../../../components/Navigation/navigation";
 import * as moment from 'moment';
 import './orders.css';
 import * as ReactBootStrap from 'react-bootstrap';
+import { useHistory } from "react-router-dom";
 const Orders = () => {
     document.title = "Order";
     const [page, setPage] = useState(1);
@@ -13,7 +14,7 @@ const Orders = () => {
     const [orders, setOrders] = useState([]);
     const [keySearch, setKeySearch] = useState("");
     const [loading, setLoading] = useState(false);
-    
+    const history = useHistory();
     const getOrders = useCallback(async (pg = page, pgSize = pageSize, status = keySearch) =>{
         const params = {
             page: pg,
@@ -148,7 +149,7 @@ const Orders = () => {
                                         <td>{item.status ? <button className="btn btn-success" onClick={() => changeStatus(item)}>Đã Giao</button> : <button onClick={() => changeStatus(item)} className="btn btn-warning">Chưa giao</button>}</td> 
                                         <td>{new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(item.total)}</td> 
                                         <td>
-                                            <button onClick={() => deleteOrder(item._id)} className="btn btn-primary" style={{margin:'auto 10px'}}><i className="fa fa-eye" aria-hidden="true"></i></button>
+                                            <button onClick={() => history.push("/admin/orderDetail/" + item._id)} className="btn btn-primary" style={{margin:'auto 10px'}}><i className="fa fa-eye" aria-hidden="true"></i></button>
                                             <button onClick={() => deleteOrder(item._id)} className="btn btn-danger" style={{margin:'auto'}}><i className="fa fa-trash" aria-hidden="true"></i></button>
                                         </td>
                                     </tr>
@@ -163,7 +164,7 @@ const Orders = () => {
                         </div>
                         <div style={{display:'inline-flex'}}>
                             <button disabled={page === 1 ? "disabled" : ""} onClick={() => prevPage()} className="btn btn-secondary">Prev</button>
-                            <button disabled={page === Math.ceil(totalCount / pageSize) ? "disabled" : ""} onClick={() => nextPage()} className="btn btn-secondary">Next</button>
+                            <button disabled={page === Math.ceil(totalCount / pageSize) || (totalCount === 0) ? "disabled" : ""} onClick={() => nextPage()} className="btn btn-secondary">Next</button>
                         </div>
                     </div>
                 </div> : <div><ReactBootStrap.Spinner animation='border' variant="success"/></div>}                         

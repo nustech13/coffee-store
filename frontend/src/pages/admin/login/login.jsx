@@ -1,15 +1,13 @@
 import React, {Component}  from 'react'; 
-import axios from 'axios';
 import Cookies from 'universal-cookie';
 import {Redirect, withRouter} from "react-router";
-import { Link } from 'react-router-dom';
 import './login.css';
 const cookies = new Cookies();
-class Login extends Component{
+class LoginAdmin extends Component{
     constructor(props) {
         super(props);
         this.state = {
-            email: "",
+            username: "",
             password: "",
         };
         this.login = this.login.bind(this);
@@ -21,16 +19,19 @@ class Login extends Component{
     }
     login = async (e) =>{
       e.preventDefault();
-      axios.post('http://localhost:5000/v1/api/auth/login/', this.state)
-        .then(data => {
-            cookies.set('customer', data.data);
-            alert("Đăng nhập thành công");
-            this.props.history.goBack();       
-        })
-        .catch(error => {
-            console.log(error);           
-        })
-        
+      if(this.state.username === ""){
+        alert("Username không được trống");
+      }else if(this.state.password === ""){
+        alert("Password không được trống");
+      }else if(this.state.username !== "admin"){
+        alert("Username không hợp lệ");
+      }else if(this.state.password !== "123456"){
+        alert("Password không hợp lệ");  
+      }else{
+        cookies.set('admin', "admin");
+        alert("Đăng nhập thành công");
+        this.props.history.push('/admin/category');
+      }        
     }
     handleChange = (changeObject) => {
       this.setState(changeObject);
@@ -38,21 +39,21 @@ class Login extends Component{
     render() {
         return(
           <>
-            {!cookies.get('customer') ? (
+            {!cookies.get('admin') ? (
                 <div className='wrapper-login'>
-                    <form className='form-login2'>
-                            <h1>Đăng Nhập</h1>
+                    <form className='form-login'>
+                            <h2>Login Admin</h2>
                             <div className="form-text">
-                                <label>Email</label>
+                                <label>Username</label>
                                 <input 
                                     type="text" 
                                     name="email" 
-                                    value={this.state.email || ""}
-                                    onChange={(e)=> this.handleChange({email: e.target.value})}
+                                    value={this.state.username || ""}
+                                    onChange={(e)=> this.handleChange({username: e.target.value})}
                                 />
                             </div>
                             <div className="form-text">
-                                <label>Mật Khẩu</label>
+                                <label>Password</label>
                                 <input 
                                 type="password" 
                                 name="password"
@@ -61,19 +62,15 @@ class Login extends Component{
                                 autoComplete="on"
                                 />
                             </div>
-                            <span>Bạn chưa có tài khoản? Đăng ký ngay <Link to={'/dang-ky'} className='register-link'>tại đây</Link>.</span>
                             <div className='btn-item'>
-                                <button onClick={(e)=> this.login(e)}>Đăng Nhập</button>
-                            </div>
-                            <div className='btn-item'>
-                                <button onClick={()=> this.props.history.push('/')}>Trang Chủ</button>
+                                <button onClick={(e)=> this.login(e)}>Login</button>
                             </div>
                         </form>        
                 </div>
             
-            ) : (<Redirect to={{pathname: "/"}}/>)}
+            ) : (<Redirect to={{pathname: "/admin/category"}}/>)}
         </>
         );
     }
 }
-export default withRouter(Login);
+export default withRouter(LoginAdmin);

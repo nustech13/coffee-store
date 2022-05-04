@@ -1,7 +1,7 @@
 import { ProductModel } from "../models/ProductModel.js";
 import { CategoryModel } from "../models/CategoryModel.js";
 import { TypeModel } from "../models/TypeModel.js"
-
+import { FeedbackModel } from "../models/FeedbackModel.js";
 function removeAccents(str) {
     return str.normalize('NFD')
               .replace(/[\u0300-\u036f]/g, '')
@@ -70,6 +70,7 @@ export const productController = {
     delete: async (req, res) =>{
         try {
             await ProductModel.findByIdAndDelete(req.params.id);
+            await FeedbackModel.deleteMany({product:req.params.id});
             res.status(200).json("Delete successfully!");
         } catch (error) {
             res.status(500).json(error);

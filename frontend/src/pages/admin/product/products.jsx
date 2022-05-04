@@ -4,6 +4,8 @@ import Navigation from "../../../components/Navigation/navigation";
 import { Link } from "react-router-dom";
 import * as ReactBootStrap from 'react-bootstrap';
 import './products.css';
+import AddProduct from "./addProduct";
+import EditProduct from "./editProduct";
 const Products = () => {
     document.title = "Product";
     const [products, setProducts] = useState([]);
@@ -14,7 +16,9 @@ const Products = () => {
     const [categories, setCategories] = useState([]);
     const [keySearch, setKeySearch] = useState('');
     const [loading, setLoading] = useState(false);
-    
+    const [isAddActive, setIsAddActive] = useState(false);
+    const [isEditActive, setIsEditActive] = useState(false);
+    const [product, setProduct] = useState({});
     const getCategories = useCallback(async () =>{
         try {
             const res = await axios.get('http://localhost:5000/v1/api/category/');
@@ -80,7 +84,7 @@ const Products = () => {
             .then(response => {
                 setLoading(false);
                 alert("Xóa sản phẩm thành công!");
-                getProducts(page);
+                getProducts(1);
             })
             .catch(error => {
                 console.log(error);
@@ -97,6 +101,8 @@ const Products = () => {
     }
     return(
       <div>
+        {isAddActive ? <AddProduct setIsAddActive={setIsAddActive} getProducts={getProducts} setLoading={setLoading} setPage={setPage}/> : <></>}
+        {isEditActive ? <EditProduct setIsEditActive={setIsEditActive} getProducts={getProducts} setLoading={setLoading} product={product} setPage={setPage}/> : <></>}
         <Navigation/>
         <div className="boxed-product">
             <h2>QUẢN LÝ PRODUCT</h2>
@@ -109,11 +115,11 @@ const Products = () => {
                         <select className="form-select" aria-label="Default select example"
                             name="categories"
                             id="categories"
-                            value={keySearch}
+                            value={keySearch || ""}
                             onChange={(e) => {handleChange(e.target.value); setLoading(false); setPage(1)}}
                         >
                             <option value={""}>Tất Cả</option>
-                            {categories.map((item) =>(
+                            {categories && categories.map((item) =>(
                               <option key={item._id} value={item._id}>
                               {item.name}
                             </option>
@@ -121,7 +127,7 @@ const Products = () => {
                         </select>
                     </div>
                     <div style={{paddingTop:20, paddingBottom: 20, paddingLeft:10}}>
-                        <Link className="btn btn-success" to={'/admin/addProduct'} style={{textDecoration: 'none'}}>Add New</Link>
+                        <button className="btn btn-success" onClick={()=> setIsAddActive(true)}>Add New</button>
                     </div>
                 </div>
                 {loading ?
@@ -138,8 +144,7 @@ const Products = () => {
                                     <th scope="col">CATEGORY</th>
                                     <th scope="col">ACTION</th>
                                 </tr>
-                                {products.map((item) => (
-                                    
+                                {products && products.map((item) => (
                                     <tr key={item._id}>
                                         <td>{item.name}</td>
                                         <td><img src={item.image} style={{height:100, width:150}} alt={""} /></td>
@@ -148,8 +153,9 @@ const Products = () => {
                                         <td>{item.description}</td>
                                         <td>{item.categories.name}</td>
                                         <td><div style={{textAlign:'center'}}>
-                                            <Link to={"/admin/editProduct/" + item._id} className="btn btn-warning" style={{textDecoration: 'none', marginRight: '20px'}}>Edit</Link>
-                                            <button onClick={() => {deleteProduct(item._id)}} className="btn btn-danger" style={{margin:'auto'}}>Delete</button>
+                                            <Link to={"/admin/feedback/" + item._id} className="btn btn-primary" style={{textDecoration: 'none'}}><i className="fa fa-eye" aria-hidden="true"></i></Link>
+                                            <button onClick={() => {setProduct(item); setIsEditActive(true)}} className="btn btn-warning" style={{margin: '0 20px'}}><i className="fa fa-pencil" aria-hidden="true"></i></button>
+                                            <button onClick={() => {deleteProduct(item._id)}} className="btn btn-danger" style={{margin:'auto'}}><i className="fa fa-trash" aria-hidden="true"></i></button>
                                         </div></td>
                                     </tr>
                                 ))}
@@ -163,7 +169,7 @@ const Products = () => {
                         </div>
                         <div style={{display:'inline-flex', marginBottom: '20px'}}>
                             <button disabled={page === 1 ? "disabled" : ""} onClick={() => {prevPage(); setLoading(false);}} className="btn btn-secondary">Prev</button>
-                            <button disabled={page === Math.ceil(totalCount / pageSize) ? "disabled" : ""} onClick={() => {nextPage(); setLoading(false);}} className="btn btn-secondary">Next</button>
+                            <button disabled={page === Math.ceil(totalCount / pageSize) || (totalCount === 0) ? "disabled" : ""} onClick={() => {nextPage(); setLoading(false);}} className="btn btn-secondary">Next</button>
                         </div>
                     </div>
                 </div> : <div><ReactBootStrap.Spinner animation='border' variant="success"/></div>}

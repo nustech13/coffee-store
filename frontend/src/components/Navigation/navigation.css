@@ -1,5 +1,5 @@
 .navigation{
-    width: 80px;
+    width: 85px;
     background-color: rgb(52, 89, 198);
     position: fixed;
     top: 0;
@@ -19,9 +19,11 @@
 }
 .navigation.active ul li span{
     display: block;
+    cursor: pointer;
 }
 .navigation ul{
     list-style: none;
+    cursor: pointer;
 }
 .navigation ul li{
     color: white;

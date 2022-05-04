@@ -14,6 +14,10 @@ import {addToCart} from '../../../actions/cart.js';
     function ProductDetail(props){
         const [product, setProduct] = useState({});
         const [quantity, setQuantity] = useState(1);
+        const [page, setPage] = useState(1);
+        const [pageSize] = useState(6);
+        const [totalCount, setTotalCount] = useState(0);
+        const [offset, setOffset] = useState(0);
         const [feedbacks, setFeedbacks] = useState([]);
         const [userName, setUserName] = useState("");
         const [email, setEmail] = useState("");
@@ -21,24 +25,39 @@ import {addToCart} from '../../../actions/cart.js';
         const [isLoading, setIsLoading] = useState(false);
         const dispatch = useDispatch();
         const [id, setId] = useState(props.match.params.id);
+        const [_id, set_Id] = useState('');
+        const getFeedbacks = useCallback(async (pg = page, pgSize = pageSize, id) =>{
+            const params = {
+                page: pg,
+                pageSize: pgSize,
+            }
+            try {
+                const res = await axios.post('http://localhost:5000/v1/api/feedback/product/' + id, params);
+                if(res.data){
+                    setFeedbacks(res.data.feedbacks.reverse());
+                    setTotalCount(res.data.numberOfResult);    
+                    setOffset(res.data.offset);
+                }
+            } catch (error) {
+                console.log("Call API Products Error:", error);
+            }
+            
+        }, [page, pageSize])
         const getProductById = useCallback(async (id) =>{
             setId(id);
             axios.get('http://localhost:5000/v1/api/product/detail/' + id)
             .then(items => {
                 setProduct(items.data[0]);
-                getFeedbacks(items.data[0]._id);
-                setIsLoading(true);
+                getFeedbacks(page, pageSize, items.data[0]._id);
+                set_Id(items.data[0]._id);
+                setTimeout(() => {
+                    setIsLoading(true);
+                }, 2500);
             }).catch(error =>{
                 console.log(error);
                 props.history.push(props.match.params.id + '/notfound404');
             });
-        }, [props.history, props.match.params.id]);
-        const getFeedbacks = async (id) =>{
-            axios.get('http://localhost:5000/v1/api/feedback/' + id)
-            .then(items => {
-                setFeedbacks(items.data);
-            });
-        }
+        }, [props.history, props.match.params.id, getFeedbacks, page, pageSize]);
         
         useEffect(()=>{
             let isMounted = true;
@@ -63,6 +82,18 @@ import {addToCart} from '../../../actions/cart.js';
                 }
             }
         }
+        const prevPage = async () =>{
+            const pg = page === 1 ? 1 : page - 1;
+            setIsLoading(false);
+            getProductById(id);
+            setPage(pg);
+        }
+        const nextPage = async () =>{
+            const pg = page < Math.ceil(totalCount / pageSize) ? page + 1 : page;
+            setIsLoading(false);
+            getProductById(id);
+            setPage(pg);
+        }
         const sendFeedback = async () =>{
             const params = {
                 name: userName,
@@ -84,8 +115,7 @@ import {addToCart} from '../../../actions/cart.js';
             }else {
                 axios.post('http://localhost:5000/v1/api/feedback/add/', params)
                 .then(response => {
-                    console.log(response);
-                    setFeedbacks(response.data);
+                    getFeedbacks(page, pageSize, _id);
                     setContent("");
                     setEmail(cookies.get('customer') ? cookies.get('customer').email : "");
                     setUserName(cookies.get('customer') ? cookies.get('customer').name : "");
@@ -187,6 +217,15 @@ import {addToCart} from '../../../actions/cart.js';
                             </div>
                         ))}
                         </div>
+                        <div style={{margin:'auto'}}>
+                        <div>
+                            <label>showing {totalCount === 0 ? 0 : offset + 1} to {offset + pageSize > totalCount ? totalCount : offset + pageSize} of {totalCount} feedbacks</label>
+                        </div>
+                        <div style={{display:'flex', margin: '0 80px'}}>
+                            <button disabled={page === 1 ? "disabled" : ""} onClick={() => prevPage()} className="btn btn-secondary">Prev</button>
+                            <button disabled={page === Math.ceil(totalCount / pageSize) || (totalCount === 0) ? "disabled" : ""} onClick={() => nextPage()} className="btn btn-secondary">Next</button>
+                        </div>
+                    </div>
                     </div>
                 </div>
                 <Footer/>
